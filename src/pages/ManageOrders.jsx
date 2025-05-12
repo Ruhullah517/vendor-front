@@ -150,22 +150,6 @@ export default function ManageOrders() {
   return (
     <div className="bg-white w-full min-h-screen">
       <div className="max-w-7xl mx-auto">
-        {/* <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold text-pink-600">Manage Orders</h1>
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search for something"
-                className="pl-10 pr-4 py-2 rounded-full bg-pink-100 text-sm w-64 focus:outline-none"
-              />
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-pink-400" />
-            </div>
-            <div className="bg-pink-100 p-2 rounded-full">
-              <Bell className="h-5 w-5 text-pink-500" />
-            </div>
-          </div>
-        </div> */}
         <header className="flex justify-between items-center p-4 border-b border-[#E6EFF5]">
           <h2 className="text-xl font-bold text-pink-600">Manage Orders</h2>
           <div className="flex items-center gap-4">
@@ -194,7 +178,7 @@ export default function ManageOrders() {
             <thead>
               <tr className="text-left text-sm">
                 <th className="p-4 font-medium text-gray-500">
-                  <input type="checkbox" className="rounded border-gray-300" />
+                  <input type="checkbox" className="rounded border-gray-300 accent-[#E5024E]" />
                 </th>
                 <th className="p-4 font-medium text-[#EE6295]">
                   Invoice ID <span className="text-[#EE6295] text-xs">▼</span>
@@ -225,7 +209,7 @@ export default function ManageOrders() {
                       type="checkbox"
                       checked={order.selected}
                       onChange={() => toggleSelect(order.id)}
-                      className="rounded border-gray-300"
+                      className="rounded border-gray-300 accent-[#E5024E]"
                     />
                   </td>
                   <td className="p-4 text-sm font-medium">{order.id}</td>
@@ -269,7 +253,7 @@ export default function ManageOrders() {
                           onClick={() => handleMoreClick(order.id)}
                           className="focus:outline-none cursor-pointer"
                         >
-                          <MoreHorizontal className="h-5 w-5 text-gray-400 z-5" />
+                          <MoreHorizontal className="h-5 w-5 text-[#E5024E] z-5" />
                         </button>
                         {openDropdownId === order.id && (
                           <div className="absolute -right-10 mt-2 w-32 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-10">

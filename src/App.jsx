@@ -11,6 +11,7 @@ import CreateOffer from "./pages/CreateOffer";
 import TrackPayments from "./pages/TrackPayments";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Setting";
+import MessagePage from './pages/MessagePage'
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path='/track-payments' element={<TrackPayments />} />
             <Route path='/analytics' element={<Analytics />} />
             <Route path='/settings' element={<Settings />} />
+            <Route path="/messages/:id" element={<MessagePage />} />
           </Routes>
         </div>
       </BrowserRouter>

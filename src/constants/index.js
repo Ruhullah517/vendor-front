@@ -27,6 +27,8 @@ import Message from '../assets/Message.svg';
 import Calender from "../assets/Calendar.svg";
 import MarkAsRead from "../assets/markasread.svg";
 import DeleteIcon from "../assets/delete.svg";
+import MessageBackground from "../assets/Frame 29.png";
+import LazeezLogo from "../assets/LazeezIcon.svg";
 
 
 const icons = {
@@ -45,20 +47,22 @@ const icons = {
     PackagesIcon: PackagesIcon,
     SettingsIcon: SettingsIcon,
     TrackPayments: TrackPayments,
-    HomeIconActive:HomeIconActive,
-    HomeIcon:HomeIcon,
-    ManageOrderIconActive:ManageOrderIconActive,
-    ChatsIconActive:ChatsIconActive,
-    CreateOfferIconActive:CreateOfferIconActive,
-    CreatePackageIconActive:CreatePackageIconActive,
-    NotificationsActive:NotificationsActive,
-    SettingsIconActive:SettingsIconActive,
-    TrackPaymentsActive:TrackPaymentsActive,
-    AnalyticsIconActive:AnalyticsIconActive,
-    Message:Message,
-    Calender:Calender,
-    MarkAsRead:MarkAsRead,
-    DeleteIcon:DeleteIcon
+    HomeIconActive: HomeIconActive,
+    HomeIcon: HomeIcon,
+    ManageOrderIconActive: ManageOrderIconActive,
+    ChatsIconActive: ChatsIconActive,
+    CreateOfferIconActive: CreateOfferIconActive,
+    CreatePackageIconActive: CreatePackageIconActive,
+    NotificationsActive: NotificationsActive,
+    SettingsIconActive: SettingsIconActive,
+    TrackPaymentsActive: TrackPaymentsActive,
+    AnalyticsIconActive: AnalyticsIconActive,
+    Message: Message,
+    Calender: Calender,
+    MarkAsRead: MarkAsRead,
+    DeleteIcon: DeleteIcon,
+    MessageBackground: MessageBackground,
+    LazeezLogo: LazeezLogo
 };
 
 export default icons;
