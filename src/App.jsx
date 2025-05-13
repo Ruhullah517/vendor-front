@@ -15,8 +15,6 @@ import MessagePage from './pages/MessagePage'
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <BrowserRouter>

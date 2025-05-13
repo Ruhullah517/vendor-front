@@ -73,7 +73,7 @@ export default function TrackPaymentsPage({
   return (
     <div className="w-full min-h-screen bg-white p-6">
       {/* Header */}
-      <header className="flex justify-between items-center pb-6 border-b border-[#E6EFF5]">
+      <header className="flex justify-between items-center pb-6 mb-4 border-b border-[#E6EFF5]">
         <h2 className="text-2xl font-bold text-pink-600">Track Payments</h2>
         <div className="flex items-center gap-4">
           <div className="relative">
@@ -96,7 +96,7 @@ export default function TrackPaymentsPage({
       {/* Main Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Monthly Income */}
-        <div className="bg-white rounded-2xl w-150 p-6 flex flex-col">
+        <div className="bg-white rounded-2xl w-150  flex flex-col">
           <div className="text-lg font-bold text-pink-700 mb-2">Monthly Income</div>
           <div className="flex-1">
             <ResponsiveContainer width="100%" height={250}>
@@ -134,7 +134,7 @@ export default function TrackPaymentsPage({
             </div>
 
         {/* Weekly Activity */}
-        <div className="w-160 flex flex-col col-span-1 md:col-span-1">
+        <div className="w-160 flex flex-col col-span-1 p-2 md:col-span-1">
           <div className="text-lg font-bold text-pink-700 mb-2">Weekly Activity</div>
           <div className="flex-1 bg-pink-50  p-6 rounded-2xl">
             <div className="flex justify-end items-center gap-2">
@@ -147,7 +147,7 @@ export default function TrackPaymentsPage({
                 barCategoryGap={30}
                 margin={{ top: 20, right: 20, left: 0, bottom: 0 }}
               >
-                <CartesianGrid strokeDasharray="1 1" stroke="#FAD1DF" />
+                <CartesianGrid strokeDasharray="0" stroke="#FAD1DF"/>
                 <XAxis
                   dataKey="day"
                   tick={{ fill: '#EE6295', fontWeight: 400 }}
@@ -160,7 +160,7 @@ export default function TrackPaymentsPage({
                   tickLine={false}
                 />
                 <Tooltip contentStyle={{ borderRadius: 12, borderColor: '#F2C4C7' }} />
-                <Legend
+                {/* <Legend
                   iconType="circle"
                   layout="horizontal"
                   align="center"
@@ -171,9 +171,9 @@ export default function TrackPaymentsPage({
                       {value.charAt(0).toUpperCase() + value.slice(1)}
                     </span>
                   )}
-                />
-                <Bar dataKey="orders" fill="#D42D69" radius={[8, 8, 0, 0]} barSize={24} />
-                <Bar dataKey="packages" fill="#EE6295" radius={[8, 8, 0, 0]} barSize={24} />
+                /> */}
+                <Bar dataKey="orders" fill="#D42D69" radius={[8, 8, 8, 8]} barSize={12} />
+                <Bar dataKey="packages" fill="#EE6295" radius={[8, 8, 8, 8]} barSize={12} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -217,6 +217,7 @@ export default function TrackPaymentsPage({
                   dataKey="value"
                   stroke="#fdf2f8"
                   strokeWidth={6}
+                  isAnimationActive={true}
                 >
                   {packageData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -229,7 +230,7 @@ export default function TrackPaymentsPage({
       </div>
 
       {/* Payment History */}
-      <div className="mt-8  rounded-2xl shadow-lg p-6">
+      <div className="mt-8  rounded-2xl p-2 w-250">
         <div className="text-lg font-bold text-pink-700 mb-2">Payment History</div>
           <div className="overflow-x-auto">
           <table className="w-full rounded-2xl overflow-hidden">
