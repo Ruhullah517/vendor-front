@@ -3,12 +3,13 @@ import { useState, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from "recharts";
 import SalesChart from "../components/dashboard/SalesChart";
 import Sidebar from "../components/dashboard/Sidebar";
-import Header from "../components/dashboard/Header";
+// import Header from "../components/dashboard/Header";
 import StatsCards from "../components/dashboard/StatsCards";
 import ReportsChart from "../components/dashboard/ReportsChart";
 import AnalyticsChart from "../components/dashboard/AnalyticsChart";
 import RecentOrdersTable from "../components/dashboard/RecentOrdersTable";
 import TopPackagesList from "../components/dashboard/TopPackagesList";
+import Header from "../components/Header";
 
 // Mock data
 const mockStats = {
@@ -108,28 +109,31 @@ export default function Dashboard() {
         );
     }
 
-  return (
-    <div className="flex w-full h-screen bg-white">
-      {/* Main Content */}
-      <div className="flex-1 overflow-auto">
-        {/* Header */}
-                <Header searchQuery={searchQuery} onSearch={handleSearch} />
-        {/* Dashboard Content */}
-        <div className="p-6 border-l border-[#E6EFF5]">
-          {/* Stats Cards */}
+    return (
+        <div className="flex w-full h-screen bg-white">
+            {/* Main Content */}
+            <div className="flex-1 overflow-auto">
+                <div className="p-6">
+                    <Header title="Dashboard" />
+                </div>
+                {/* Header */}
+                {/* <Header searchQuery={searchQuery} onSearch={handleSearch} /> */}
+                {/* Dashboard Content */}
+                <div className="p-6 border-l border-[#E6EFF5]">
+                    {/* Stats Cards */}
                     <StatsCards stats={stats} />
-          {/* Charts Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    {/* Charts Section */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                         <ReportsChart />
                         <AnalyticsChart analyticsData={analyticsData} />
                     </div>
-          {/* Tables Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Tables Section */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <RecentOrdersTable recentOrders={recentOrders} />
                         <TopPackagesList topPackages={topPackages} />
-              </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
     );
 }
@@ -196,8 +200,8 @@ function CircleProgress({ data, duration = 1200 }) {
     // The gap is just the remaining circumference
     const gapDash = (GAP_PERCENT / 100) * circumference;
 
-  return (
-    <svg className="w-full h-full" viewBox="0 0 200 200">
+    return (
+        <svg className="w-full h-full" viewBox="0 0 200 200">
             {/* SVG filter for drop shadow */}
             <defs>
                 <filter id="segmentShadow" x="-20%" y="-20%" width="140%" height="140%">
@@ -242,19 +246,19 @@ function CircleProgress({ data, duration = 1200 }) {
                 filter="url(#segmentShadow)"
             />
             {/* Sale segment */}
-      <circle
-        cx="100"
-        cy="100"
-        r={radius}
-        fill="none"
+            <circle
+                cx="100"
+                cy="100"
+                r={radius}
+                fill="none"
                 stroke={saleColor}
                 strokeWidth={strokeWidthSale}
                 strokeDasharray={`${salesDash} ${circumference}`}
-        strokeLinecap="round"
-        transform="rotate(-90 100 100)"
+                strokeLinecap="round"
+                transform="rotate(-90 100 100)"
                 style={{ transition: 'stroke-dasharray 0.2s linear' }}
                 filter="url(#segmentShadow)"
-      />
-    </svg>
+            />
+        </svg>
     );
 }

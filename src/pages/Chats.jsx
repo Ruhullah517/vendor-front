@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Search, Bell, Star, MoreHorizontal, Trash2, CheckCircle } from "lucide-react"
 import icons from "../constants/index"
 import { useNavigate } from "react-router-dom"
+import Header from "../components/Header"
 // import Image from "next/image"
 
 export default function Chats() {
@@ -195,31 +196,9 @@ export default function Chats() {
   }
 
   return (
-    <div className="bg-white w-full min-h-screen">
+    <div className="bg-white w-full min-h-screen p-6">
+      <Header title="Chats"/>
       <div className="max-w-7xl mx-auto">
-        <header className="flex justify-between items-center p-4 border-b border-[#E6EFF5]">
-          <h2 className="text-xl font-bold text-pink-600">Chats</h2>
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-[#E72765]" />
-              <input
-                type="text"
-                placeholder="Search for something"
-                className="pl-10 pr-4 py-2 rounded-full bg-[#F2C4C7] text-sm text-[#E5024E] w-64 focus:outline-none"
-              // value={searchQuery}
-              // onChange={onSearch}
-              />
-            </div>
-            <button className="w-10 h-10 rounded-full bg-[#F2C4C7] flex items-center justify-center text-pink-600">
-              {/* <Bell className="w-5 h-5" /> */}
-              <img src={icons.FoodIcon} className="w-5 h-5" />
-            </button>
-            <button className="w-10 h-10 rounded-full bg-[#F2C4C7] flex items-center justify-center text-pink-600">
-              <img src={icons.NotificationIcon} alt="" className="w-7.5 h-7.5" />
-            </button>
-          </div>
-        </header>
-
         <div className="bg-white border-l border-[#E6EFF5] pt-15">
           <table className="w-full">
             <thead>
@@ -236,9 +215,6 @@ export default function Chats() {
                 <th className="p-4 font-medium text-[#EE6295]">
                   Description <span className="text-[#EE6295] text-xs">▼</span>
                 </th>
-                {/* <th className="p-4 font-medium text-[#EE6295]">
-                  Date <span className="text-[#EE6295] text-xs">▼</span>
-                </th> */}
                 <th className="p-4 font-medium text-[#EE6295]">
                   Status <span className="text-[#EE6295] text-xs">▼</span>
                 </th>
@@ -279,14 +255,6 @@ export default function Chats() {
                       <span className="text-sm text-gray-600">{order.description.split(' ').slice(0, 4).join(' ')}...</span>
                     </div>
                   </td>
-                  {/* <td className="p-4">
-                    <div className="flex items-center gap-2">
-                      <div className="p-1 rounded">
-                        <img src={icons.Calender} alt="" className="w-3 h-3" />
-                      </div>
-                      <span className="text-sm text-gray-600">{order.date}</span>
-                    </div>
-                  </td> */}
                   <td className="p-4">
                     {order.isNew && (
                       <span className="px-3 py-1 rounded-full text-xs font-medium bg-pink-100 text-pink-800">
@@ -296,11 +264,7 @@ export default function Chats() {
                   </td>
                   <td className="p-4" onClick={(e) => e.stopPropagation()}>
                     <div className="flex items-center gap-4">
-                      {/* <button onClick={() => toggleStar(order.id)} className="focus:outline-none">
-                        <Star
-                          className={`h-5 w-5 ${order.starred ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
-                        />
-                      </button> */}
+                     
                       <div className="relative">
                         <button
                           onClick={() => handleMoreClick(order.id)}

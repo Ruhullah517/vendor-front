@@ -12,6 +12,9 @@ import TrackPayments from "./pages/TrackPayments";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Setting";
 import MessagePage from './pages/MessagePage'
+import PackageCreation from './pages/packageCreation'
+import EditPackage from './pages/editPackage'
+import OrderDetail from './pages/orderDetail'
 
 
 function App() {
@@ -31,6 +34,9 @@ function App() {
             <Route path='/analytics' element={<Analytics />} />
             <Route path='/settings' element={<Settings />} />
             <Route path="/messages/:id" element={<MessagePage />} />
+            <Route path="/package-creation" element={<PackageCreation />} />
+            <Route path="/edit-package" element={<EditPackage />} />
+            <Route path="/order-detail" element={<OrderDetail />} />
           </Routes>
         </div>
       </BrowserRouter>

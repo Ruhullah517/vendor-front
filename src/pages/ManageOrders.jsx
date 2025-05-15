@@ -1,9 +1,13 @@
 import { useState } from "react"
 import { Search, Bell, Star, MoreHorizontal, Trash2, CheckCircle } from "lucide-react"
 import icons from "../constants/index"
+import Header from "../components/Header"
+import StatusDropdown from "../components/customDropDown"
+import { useNavigate } from 'react-router-dom'
 // import Image from "next/image"
 
 export default function ManageOrders() {
+  const navigate = useNavigate()
   const [orders, setOrders] = useState([
     {
       id: "#876354",
@@ -14,6 +18,14 @@ export default function ManageOrders() {
       status: "Complete",
       starred: true,
       selected: false,
+      packageName: "Grand Walima",
+      packageType: "Buffet",
+      foodItem: "Biryani, Korma, Naan",
+      totalServing: "500",
+      addOns: "Karachi",
+      price: "500000",
+      preparationTime: "2",
+      deliveryTime: "1"
     },
     {
       id: "#876123",
@@ -71,7 +83,7 @@ export default function ManageOrders() {
       avatar: "/placeholder.svg?height=32&width=32",
       description: "Ordered Barat pack...",
       date: "10 Dec, 2022",
-      status: "AOS Status",
+      status: "Pending",
       starred: false,
       selected: false,
     },
@@ -81,7 +93,7 @@ export default function ManageOrders() {
       avatar: "/placeholder.svg?height=32&width=32",
       description: "Ordered Barat pack...",
       date: "10 Dec, 2022",
-      status: "AOS Status",
+      status: "Completed",
       starred: false,
       selected: false,
     },
@@ -91,7 +103,7 @@ export default function ManageOrders() {
       avatar: "/placeholder.svg?height=32&width=32",
       description: "Ordered Barat pack...",
       date: "10 Dec, 2022",
-      status: "AOS Status",
+      status: "Cancelled",
       starred: false,
       selected: false,
     },
@@ -101,12 +113,19 @@ export default function ManageOrders() {
       avatar: "/placeholder.svg?height=32&width=32",
       description: "Ordered Barat pack...",
       date: "10 Dec, 2022",
-      status: "AOS Status",
+      status: "Pending",
       starred: false,
       selected: false,
     },
   ])
   const [openDropdownId, setOpenDropdownId] = useState(null)
+
+  const statusOptions = [
+    "Complete",
+    "Pending",
+    "Upcoming",
+    "Cancelled"
+  ]
 
   const toggleStar = (id) => {
     setOrders(orders.map((order) => (order.id === id ? { ...order, starred: !order.starred } : order)))
@@ -130,49 +149,35 @@ export default function ManageOrders() {
     setOpenDropdownId(null)
   }
 
+  const handleStatusChange = (id, newStatus) => {
+    setOrders(orders.map((order) =>
+      order.id === id ? { ...order, status: newStatus } : order
+    ))
+  }
+
   const getStatusColor = (status) => {
     switch (status) {
       case "Complete":
-        return "bg-green-100 text-green-800"
+        return "bg-green-100 text-[#3A974C]"
       case "Pending":
-        return "bg-orange-100 text-orange-800"
+        return "bg-orange-100 text-[#F29339]"
       case "Upcoming":
-        return "bg-blue-100 text-blue-800"
+        return "bg-blue-100 text-[#3A4297]"
       case "Cancelled":
-        return "bg-red-100 text-red-800"
-      case "AOS Status":
-        return "bg-purple-100 text-purple-800"
+        return "bg-red-100 text-[#E71D36]"
       default:
         return "bg-gray-100 text-gray-800"
     }
   }
 
-  return (
-    <div className="bg-white w-full min-h-screen">
-      <div className="max-w-7xl mx-auto">
-        <header className="flex justify-between items-center p-4 border-b border-[#E6EFF5]">
-          <h2 className="text-xl font-bold text-pink-600">Manage Orders</h2>
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-[#E72765]" />
-              <input
-                type="text"
-                placeholder="Search for something"
-                className="pl-10 pr-4 py-2 rounded-full bg-[#F2C4C7] text-sm text-[#E5024E] w-64 focus:outline-none"
-              // value={searchQuery}
-              // onChange={onSearch}
-              />
-            </div>
-            <button className="w-10 h-10 rounded-full bg-[#F2C4C7] flex items-center justify-center text-pink-600">
-              {/* <Bell className="w-5 h-5" /> */}
-              <img src={icons.FoodIcon} className="w-5 h-5" />
-            </button>
-            <button className="w-10 h-10 rounded-full bg-[#F2C4C7] flex items-center justify-center text-pink-600">
-              <img src={icons.NotificationIcon} alt="" className="w-7.5 h-7.5" />
-            </button>
-          </div>
-        </header>
+  const handleOrderClick = (order) => {
+    navigate('/order-detail', { state: { orderData: order } });
+  }
 
+  return (
+    <div className="bg-white w-full min-h-screen p-6">
+      <Header title="Manage Orders" />
+      <div className="max-w-7xl mx-auto">
         <div className="bg-white border-l border-[#E6EFF5] pt-15">
           <table className="w-full">
             <thead>
@@ -203,7 +208,11 @@ export default function ManageOrders() {
             </thead>
             <tbody>
               {orders.map((order) => (
-                <tr key={order.id} className="hover:shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] hover:scale-[1] duration-200 rounded-lg">
+                <tr 
+                  key={order.id} 
+                  className="hover:shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] duration-200 rounded-lg cursor-pointer"
+                  onClick={() => handleOrderClick(order)}
+                >
                   <td className="p-4">
                     <input
                       type="checkbox"
@@ -236,11 +245,24 @@ export default function ManageOrders() {
                       <span className="text-sm text-gray-600">{order.date}</span>
                     </div>
                   </td>
-                  <td className="p-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
-                      {order.status}
-                    </span>
-                  </td>
+                  <StatusDropdown order={order} onChange={handleStatusChange}/>
+                  {/* <td className="p-4">
+                    <select
+                      value={order.status}
+                      onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                      className={`px-6 py-2  rounded-full text-xs font-medium ${getStatusColor(order.status)} border-none focus:ring-4 focus:ring-pink-500 focus:border-none cursor-pointer appearance-none`}
+                    >
+                      {statusOptions.map((status) => (
+                        <option 
+                          key={status} 
+                          value={status}
+                          className={`${getStatusColor(status)}`}
+                        >
+                          {status}
+                        </option>
+                      ))}
+                    </select>
+                  </td> */}
                   <td className="p-4">
                     <div className="flex items-center gap-4">
                       <button onClick={() => toggleStar(order.id)} className="focus:outline-none">
