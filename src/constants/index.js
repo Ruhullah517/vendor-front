@@ -29,6 +29,7 @@ import MarkAsRead from "../assets/markasread.svg";
 import DeleteIcon from "../assets/delete.svg";
 import MessageBackground from "../assets/Frame 29.png";
 import LazeezLogo from "../assets/LazeezIcon.svg";
+import ChefIcon from "../assets/chefIcon.svg";
 
 
 const icons = {
@@ -62,7 +63,8 @@ const icons = {
     MarkAsRead: MarkAsRead,
     DeleteIcon: DeleteIcon,
     MessageBackground: MessageBackground,
-    LazeezLogo: LazeezLogo
+    LazeezLogo: LazeezLogo,
+    ChefIcon: ChefIcon
 };
 
 export default icons;

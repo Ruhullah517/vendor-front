@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { Search, Bell, User, MoreVertical, Check, MoreHorizontal } from "lucide-react"
 import icons from "../constants/index"
 import Header from "../components/Header"
@@ -11,6 +11,7 @@ function CreatePackage() {
   const [SuccessPopup, setSuccessPopup] = useState(false);
   const [UpdatePopup, setUpdatePopup] = useState(false);
   const navigate = useNavigate()
+  const menuRef = useRef(null);
 
   const packages = [
     { 
@@ -62,14 +63,37 @@ function CreatePackage() {
     }
   }, [location.state]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if the click is on the MoreHorizontal button
+      const isMoreButton = event.target.closest('button');
+      if (isMoreButton) return;
+
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setActiveMenu(null);
+        setShowPopup(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const toggleMenu = (id) => {
     if (activeMenu === id) {
-      setActiveMenu(null)
-      setShowPopup(false)
+      setActiveMenu(null);
+      setShowPopup(false);
     } else {
-      setActiveMenu(id)
-      setShowPopup(true)
+      setActiveMenu(id);
+      setShowPopup(true);
     }
+  }
+
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    // Add your delete logic here
+    setActiveMenu(null);
+    setShowPopup(false);
   }
 
   const handleCreatePackage = () => {
@@ -100,10 +124,10 @@ function CreatePackage() {
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="relative">
+                <div className="relative" ref={menuRef}>
                   <button 
                     onClick={(e) => {
-                      e.stopPropagation(); // Prevent triggering the parent onClick
+                      e.stopPropagation();
                       toggleMenu(packageItem.id);
                     }} 
                     className="text-gray-400 hover:text-gray-600 cursor-pointer"
@@ -114,20 +138,7 @@ function CreatePackage() {
                   {activeMenu === packageItem.id && showPopup && (
                     <div className="absolute -right-32 top-2 mt-2 w-32 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-10">
                       <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handlePackageClick(packageItem);
-                        }}
-                        className="w-full bg-gray-50 px-2 py-2 rounded-lg text-left text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2 z-10"
-                      >
-                        <img src={icons.MarkAsRead} alt="" className="h-3 w-3" />
-                        Edit Package
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDelete();
-                        }}
+                        onClick={handleDelete}
                         className="w-full px-2 bg-[#ee62953b] py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-50 flex items-center gap-2 z-10"
                       >
                         <img src={icons.DeleteIcon} alt="" className="h-3 w-3" />

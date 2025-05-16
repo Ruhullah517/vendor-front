@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
-const statusOptions = ['Completed', 'Pending', 'Upcoming', 'Canceled'];
+const statusOptions = ['Complete', 'Pending', 'Upcoming', 'Cancelled'];
 
 const getStatusStyle = (status) => {
     switch (status) {
@@ -39,8 +39,11 @@ const StatusDropdown = ({ order, onChange }) => {
     return (
         <td className="p-4 relative" ref={dropdownRef}>
             <button
-                onClick={() => setOpen(!open)}
-                className={`px-4 py-1.5 w-30 rounded-full text-sm font-medium ${getStatusStyle(order.status)}`}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setOpen(!open);
+                }}
+                className={`px-4 cursor-pointer py-1.5 w-30 rounded-full text-sm font-medium ${getStatusStyle(order.status)}`}
             >
                 {order.status || 'Add status'}
             </button>
@@ -50,8 +53,11 @@ const StatusDropdown = ({ order, onChange }) => {
                     {statusOptions.map((status) => (
                         <button
                             key={status}
-                            onClick={() => handleSelect(status)}
-                            className={`w-full text-center px-4 py-2 rounded-lg text-xs font-medium hover:opacity-80 transition ${getStatusStyle(status)}`}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleSelect(status);
+                            }}
+                            className={`w-full cursor-pointer text-center px-4 py-2 rounded-lg text-xs font-medium hover:opacity-80 transition ${getStatusStyle(status)}`}
                         >
                             {status}
                         </button>
