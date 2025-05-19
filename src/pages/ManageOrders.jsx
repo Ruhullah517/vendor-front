@@ -211,7 +211,7 @@ export default function ManageOrders() {
   const [selectAll, setSelectAll] = useState(false)
   const [cancelModalOpen, setCancelModalOpen] = useState(false)
   const [selectedOrderId, setSelectedOrderId] = useState(null)
-  const [showNewOrderPopup, setShowNewOrderPopup] = useState(true)
+  const [showNewOrderPopup, setShowNewOrderPopup] = useState(false)
   const [newOrder, setNewOrder] = useState({
     id: "#876999",
     name: "New Customer",
@@ -235,6 +235,14 @@ export default function ManageOrders() {
     isNew: true
   })
   const menuRef = useRef(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowNewOrderPopup(true);
+    }, 1000); // 1 second delay
+
+    return () => clearTimeout(timer);
+  }, []); // Empty dependency array means this runs once on mount
 
   useEffect(() => {
     const handleClickOutside = (event) => {
